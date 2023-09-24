@@ -70,6 +70,10 @@ async function getMediaList() {
 
   console.log(result)
 
+  if (!chrome.runtime?.id) {
+    console.log('F5')
+    return
+  }
   await chrome.runtime.sendMessage({
     cmd: 'content_script_to_list_tab',
     url: location.href,

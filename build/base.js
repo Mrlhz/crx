@@ -5,6 +5,11 @@ const { VueLoaderPlugin } = require('vue-loader')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 
+// webpack.config.js
+const AutoImport = require('unplugin-auto-import/webpack')
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+
 const utils = require('../utils/util')
 
 // 导出默认的配置信息. 其他的先不管.
@@ -66,6 +71,12 @@ module.exports = {
           return true
         } }
       ]
+    }),
+    AutoImport({
+      resolvers: [ElementPlusResolver()]
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()]
     })
   ].concat(utils.genHtmlPlugins()),
   optimization: {
